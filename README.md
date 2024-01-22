@@ -5,5 +5,5 @@
 day{n}/{문제번호}-{문제명}/{본인 username}.{py/java}
 
 **Commit message**
-1. solve: {문제번호}-{문제명}
+1. solve
 2. refactor: {refactoring 설명}
