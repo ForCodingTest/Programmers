@@ -5,7 +5,7 @@ def solution(msg):
     dictionary = [chr(ord('A') + i) for i in range(26)]
     
     i = 0
-    c = ''
+    c = ''   # msg가 한 글자인 경우, c에 값이 할당되지 않아 UnboundLocalError 발생
     while i < len(msg):
         w = msg[i]
         j = i + 1
