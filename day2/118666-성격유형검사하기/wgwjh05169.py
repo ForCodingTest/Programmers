@@ -4,9 +4,9 @@ def solution(survey, choices):
     score = {"A": 0, "N": 0, "R": 0, "T": 0, "C": 0, "F": 0, "J": 0, "M": 0}
     for s, c in zip(survey, choices):
         if 0 < c < 4:
-            score[s[0]] += abs(4 - c)
+            score[s[0]] += 4 - c
         elif c > 4:
-            score[s[1]] += abs(4 - c)
+            score[s[1]] += 4 - c
     
     types = {"R": "T", "C": "F", "J": "M", "A": "N"}
     ans = ""
