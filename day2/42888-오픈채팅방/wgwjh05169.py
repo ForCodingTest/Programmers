@@ -11,15 +11,13 @@ def solution(record):
             uid, nickname = uid.split(" ")
         
         if action in message:
-            answer.append([uid, message[action]])
+            answer.append([uid, action])
             if action == 'Enter':
                 id_to_name[uid] = nickname
         else:
             id_to_name[uid] = nickname
     
-    i = 0
-    while i < len(answer):
-        answer[i] = id_to_name[answer[i][0]] + answer[i][1]
-        i += 1
-        
+    for i in range(len(answer)):
+        answer[i] = id_to_name[answer[i][0]] + message[answer[i][1]]
+    
     return answer
