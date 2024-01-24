@@ -6,7 +6,7 @@ def solution(survey, choices):
         if 0 < c < 4:
             score[s[0]] += 4 - c
         elif c > 4:
-            score[s[1]] += 4 - c
+            score[s[1]] += c - 4
     
     types = {"R": "T", "C": "F", "J": "M", "A": "N"}
     ans = ""
