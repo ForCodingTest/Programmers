@@ -34,7 +34,6 @@ def solution(friends, gifts):
         return max(result)
     
     return answer
-
 # 3:48
 # 4:19
 # 두 사람이 선물을 주고받은 기록이 있다면, 이번 달까지 두 사람 사이에 더 많은 선물을 준 사람이 다음 달에 선물을 하나 받습니다.
