@@ -25,7 +25,7 @@ def get_correct(w):
         return u + get_correct(v)
     else:
         u = u[1:-1]
-        return '(' + get_correct(v) + ')' + ''.join(list(map(lambda x: reverse[x], list(u))))
+        return '(' + get_correct(v) + ')' + str(map(lambda x: reverse[x], list(u)))
 
 
 def is_correct(u):
@@ -43,3 +43,4 @@ def is_correct(u):
         return False
     
     return True
+print(solution("())())(("))
