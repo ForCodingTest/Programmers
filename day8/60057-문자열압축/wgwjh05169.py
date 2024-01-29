@@ -20,10 +20,9 @@ def solution(s):
 
 def split_byn(string, n):
     tokens = []
-    copy = string[:]
-    while copy:
-        tokens.append(copy[:n])
-        copy = copy[n:]
+    while string:
+        tokens.append(string[:n])
+        string = string[n:]
     
     return tokens
 
