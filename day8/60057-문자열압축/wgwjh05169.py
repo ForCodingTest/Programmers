@@ -8,8 +8,7 @@ def solution(s):
     if len(s) < 2:
         return calculate(memory[0])
     
-    memory.append(split_byn(s, 2))
-    for i in range(3, len(s)):
+    for i in range(2, len(s)):
         if i % 2 == 1:
             memory.append(split_byn(s, i))
         else:
