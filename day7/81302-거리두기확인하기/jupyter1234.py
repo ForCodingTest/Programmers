@@ -43,4 +43,4 @@ def check(arr):
 #case 3,8,31 오류 7시
 #if not (sec_i == i and sec_j == j) 이렇게 했어야함 아니면 if (sec_i != i or sec_j != j)
 #기존에는 if (sec_i != i or sec_j != j) 이었음
-#엥 왜지
+#아 미친 아 아
