@@ -24,8 +24,6 @@ def findfee(board):
                 dr,dc=dirset
                 curr,curc=r+dr,c+dc
                 if 0<=curr<len(board) and 0<=curc<len(board) and board[curr][curc]!=1:
-                    if curr==curc==len(board)-1:
-                        ret.append
                     if idx!=op:
                         if check[curr][curc][idx]>fee+600:
                             check[curr][curc][idx]=fee+600
