@@ -1,0 +1,65 @@
+import java.util.*;
+// dikstra 로 S, A, B를 확인
+// S ~ O + O~A / O ~ B 까지 거리가 같은 곳 확인.
+class Solution {
+    private List<LinkedList<List<Integer>>> graph = new ArrayList<>();
+    
+    public void init(int n, int[][] fares){
+        for(int i = 0; i < n; i++){
+            graph.add(new LinkedList<>());
+        }
+        for(int[] fare : fares){
+            graph.get(fare[0] - 1).add(List.of(fare[0] - 1, fare[1] - 1, fare[2]));
+            graph.get(fare[1] - 1).add(List.of(fare[1] - 1, fare[0] - 1, fare[2]));
+        }
+    }
+    
+    public List<Integer> dikstra(int position, int n){
+        List<Integer> distance = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            distance.add(Integer.MAX_VALUE);
+        }
+        distance.set(position, 0);
+        boolean[] visited = new boolean[n];
+        PriorityQueue<List<Integer>> pq = new PriorityQueue<>((a, b) -> {
+            return a.get(2) - b.get(2);
+        });
+        for(int i = 0; i < n; i++){ 
+            visited[position] = true;
+        
+            for(List<Integer> edge : graph.get(position)){
+                if(visited[edge.get(1)]){
+                    continue;
+                }
+                if(distance.get(position) + edge.get(2) < distance.get(edge.get(1))){
+                    distance.set(edge.get(1), distance.get(position) + edge.get(2));
+                    pq.add(new ArrayList<>(List.of(edge.get(0), edge.get(1), edge.get(2) + distance.get(position))));
+                }
+            }
+            while( !pq.isEmpty() && visited[pq.peek().get(1)]){
+                pq.remove();
+            }
+            if(pq.isEmpty()){
+                break;
+            }
+            position = pq.remove().get(1);
+        }
+        return distance;
+    }
+    
+    public int getResult(List<Integer> sDistance, List<Integer> aDistance, List<Integer> bDistance){
+        int min = Integer.MAX_VALUE;
+        // System.out.println("S : " + sDistance);
+        // System.out.println("A : " + aDistance);
+        // System.out.println("B : " + bDistance);
+        for(int i = 0; i < sDistance.size(); i++){
+            // System.out.println(sDistance.get(i) + aDistance.get(i) + bDistance.get(i));
+            min = Math.min(min, sDistance.get(i) + aDistance.get(i) + bDistance.get(i));
+        }
+        return min;
+    }
+    public int solution(int n, int s, int a, int b, int[][] fares) {
+        init(n, fares);
+        return getResult(dikstra(s - 1, n), dikstra(a - 1, n), dikstra(b - 1, n));
+    }
+}
