@@ -1,0 +1,53 @@
+import java.util.*;
+
+// 개수 단위로 자름.
+class Solution {
+
+    public int solution(String s) {
+        int answer = s.length();
+        if(answer == 1 || answer == 2){
+            return answer;
+        }
+        for(int i = 1; i < s.length(); i++){
+            String remainString = s;
+            int cnt = 0;
+            while(true){
+                if(i > remainString.length() / 2){
+                    cnt += remainString.length();
+                    break;
+                }
+                Object[] result = getResult(remainString, i);
+                if((String)result[1] == remainString){
+                    cnt += i;
+                    remainString = remainString.substring(i);
+                    continue;
+                }
+                remainString = (String) result[1];
+                cnt += (int) result[0];
+            }
+            answer = Math.min(answer, cnt);
+        }
+        return answer;
+    }
+    public Object[] getResult(String s, int i){
+        String pattern = s.substring(0, i);
+        String remainString = s.substring(i);
+        int cnt = pattern.length();
+        int flag = 1;
+        while(true){
+            if(remainString.length() < i){
+                break;
+            }
+            if(pattern.equals(remainString.substring(0,i))){
+                flag ++;
+                remainString = remainString.substring(i);
+                continue;
+            }
+            break;
+        }
+        if(flag > 1){
+            return new Object[]{cnt + (int)Math.log10(flag) + 1, remainString};
+        }
+        return new Object[]{cnt, s};
+    }
+}
