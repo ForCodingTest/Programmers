@@ -1,0 +1,78 @@
+import java.util.*;
+class Solution {
+    private final int[][] directions = {{1,0}, {0,1}, {-1,0}, {0,-1}};
+    public List<Integer> solution(String[][] places) {
+        List<Integer> answer = new ArrayList<>();
+        for(String[] place : places){
+            Character[][] map = new Character[5][5];
+            for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                    map[i][j] = place[i].charAt(j);
+                }
+            }
+            // for(Character[] ma : map){
+            //     System.out.println(Arrays.toString(ma));
+            // }
+            boolean flag = false;
+            for(int i = 0; i < 5; i++){
+                for(int j = 0; j < 5; j++){
+                    if(map[i][j] == 'O' || map[i][j] == 'X'){
+                        continue;
+                    }
+                    flag = BFS(map, i, j);
+                    if(flag){
+                        answer.add(0);
+                        break;
+                    }
+                }
+                if(flag){
+                    break;
+                }
+            }
+            if(!flag){
+                answer.add(1);
+            }
+        }
+        return answer;
+    }
+    
+    public boolean BFS( Character[][] map, int i, int j ){
+        Queue<List<Integer>> queue = new LinkedList<>();
+        boolean[][] visited = new boolean[5][5];
+        visited[i][j] = true;
+        queue.add(List.of(i, j, 0));
+        while(!queue.isEmpty()){
+            List<Integer> current = queue.remove();
+            // System.out.println("Current : " + current);
+            for(int[] direction : directions){
+                List<Integer> next = List.of(current.get(0) + direction[0], current.get(1) + direction[1], current.get(2) + 1);        
+                
+                // System.out.println("next : " + next);
+                if(next.get(0) > 4 || next.get(0) < 0){
+                    continue;
+                }
+                if(next.get(1) > 4 || next.get(1) < 0){
+                    continue;
+                }
+                if(visited[next.get(0)][next.get(1)]){
+                    continue;
+                }
+                
+                if(next.get(2) > 2){
+                    continue;
+                }
+                if(map[next.get(0)][next.get(1)] == 'X'){
+                    continue;
+                }
+                if(map[next.get(0)][next.get(1)] == 'O'){
+                    // System.out.println("Pushed : " + next);
+                    queue.add(next);
+                    visited[next.get(0)][next.get(1)] = true;
+                    continue;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+}
