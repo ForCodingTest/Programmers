@@ -1,0 +1,38 @@
+import java.util.*;
+class Solution {
+    private Map<String, Integer> nameMap = new HashMap<>();
+    private Map<String, Integer> reportedMap = new HashMap<>();
+    private int[][] reportTable;
+    public void init(String[] id_list){
+        int index = 0;
+        reportTable = new int[id_list.length][id_list.length];
+        for(String id : id_list){
+            nameMap.put(id, index++);
+            reportedMap.put(id, 0);
+        }
+    }
+    
+    public List<Integer> solution(String[] id_list, String[] reports, int k) {
+        
+        List<Integer> answer = new ArrayList<>();
+        init(id_list);
+        for(String report : reports){
+            String[] reportInfo = report.split(" ");
+            if(reportTable[nameMap.get(reportInfo[0])][nameMap.get(reportInfo[1])] == 1){
+                continue;
+            }
+            reportTable[nameMap.get(reportInfo[0])][nameMap.get(reportInfo[1])] ++;
+            reportedMap.put(reportInfo[1], reportedMap.get(reportInfo[1]) + 1);
+        }
+        for(int[] report : reportTable){
+            int cnt = 0;
+            for(int i = 0; i < report.length; i++){
+                if(report[i] == 1 && reportedMap.get(id_list[i]) >= k){
+                    cnt ++;
+                }
+            }
+            answer.add(cnt);
+        }
+        return answer;
+    }
+}
