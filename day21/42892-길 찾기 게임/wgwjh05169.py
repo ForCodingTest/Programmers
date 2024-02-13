@@ -10,8 +10,7 @@ def solution(nodeinfo):
     
     tree = get_tree(nodeinfo)
     
-    preorder(tree)
-    postorder(tree)
+    order(tree)
     
     return pre, post
 
@@ -39,19 +38,12 @@ def get_tree(nodeinfo):
     return tree
     
     
-def preorder(node):
+def order(node):
     pre.append(node[0])
     if node[3]:
-        preorder(node[3])
+        order(node[3])
     if node[4]:
-        preorder(node[4])
-
-    
-def postorder(node):
-    if node[3]:
-        postorder(node[3])
-    if node[4]:
-        postorder(node[4])
+        order(node[4])
     post.append(node[0])
 
 
