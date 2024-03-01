@@ -6,3 +6,4 @@ def solution(numbers):
     return ''.join(numbers[::-1])
 
 #8:00
+    
